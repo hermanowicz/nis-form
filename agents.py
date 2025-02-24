@@ -19,8 +19,6 @@ knowledge_base = PDFKnowledgeBase(
     reader=PDFReader(chunk=True),
 )
 
-# knowledge_base.load(recreate=False)
-
 agent = Agent(
     # to be added ollama binding
     model=Ollama(id="command-r7b:latest", host="localhost:11434"),
@@ -28,8 +26,11 @@ agent = Agent(
     search_knowledge=True,
     debug_mode=True,
     show_tool_calls=True,
-    description="""you are proffesional legal advisor, with knowlage about EU and Ploish regulations About NIS 2 AND GDPR (RODO), always provide clear answear with links and documents to suppoert your answears. Never Lie and if you are not sure tell that and redirect user to lawyer."""
+    description="""You are proffesional legal advisor, with knowlage about EU and Ploish regulations About NIS 2 AND GDPR (RODO), always provide clear answear with links and document paragrafs from knowledge base to suppoert your answears. Never Lie and if you are not sure tell that and redirect user to lawyer."""
 )
 
+if agent.knowledge is not None:
+    agent.knowledge.load(upsert=True)
+
 agent.print_response(
-    "Who will need to implemt NIS 2 directive?", markdown=True)
+    "Will I need implement NIS 2 as small buisnes providing server administration services to SMB in my city?", markdown=True)
