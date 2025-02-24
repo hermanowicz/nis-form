@@ -12,6 +12,8 @@ streamlit = "*"
 ollama = "*"
 duckduckgo-search = "*"
 watchdog = "*"
+tantivy = "*"
+numpy = "*"
 
 [dev-packages]
 
